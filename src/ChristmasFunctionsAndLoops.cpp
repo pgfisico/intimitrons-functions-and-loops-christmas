@@ -57,6 +57,8 @@ int main()
     // Hint: You may want to use a loop for this
 
     printStem(height);
+
+    return 0;
 }
 
 /*
