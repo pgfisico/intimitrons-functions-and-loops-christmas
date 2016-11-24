@@ -53,8 +53,22 @@ int main()
 
     printStar(height);
 
-    // TODO Implement the code to print each line of the tree
-    // Hint: You may want to use a loop for this
+    /*
+     * I chose to start my loop counter from zero, but in this case starting it from one
+     * may make more sense to some of you, as it would allow us to print (height - row) blanks
+     * instead of (height - row - 1) blanks.
+     */
+    for (int row = 0; row < height; row++)
+    {
+        // Note that using code (an expression) as an argument for a function is perfectly acceptable
+        // We compute height - row - 1 without using an additional variable
+        printCharacter(BLANK, height - row - 1);
+        printCharacter(FORWARD_SLASH, row);
+        printCharacter(VERTICAL_LINE);
+        printCharacter(BACKWARD_SLASH, row);
+
+        std::cout << std::endl;
+    }
 
     printStem(height);
 
@@ -90,11 +104,11 @@ int askForChristmasTreeHeight()
 {
     int height;
 
-    // TODO Run the following two lines of code in a loop until a valid height is entered
-    // Call canProgramPrintChristmasTree to check the height
-    // Hint: You may need to know that in C++, a single ! means NOT
-    std::cout << "Enter a tree height: ";
-    std::cin >> height;
+    do
+    {
+        std::cout << "Enter a tree height: ";
+        std::cin >> height;
+    } while (!canProgramPrintChristmasTree(height));
 
     return height;
 }
@@ -112,7 +126,11 @@ void printCharacter(char character)
  */
 void printCharacter(char character, int number)
 {
-    // TODO Implement this function
+    for (int i = 0; i < number; i++)
+    {
+        // Note: You could also call printCharacter(char) here
+        std::cout << character;
+    }
 }
 
 /*
@@ -120,9 +138,8 @@ void printCharacter(char character, int number)
  */
 void printStar(int treeHeight)
 {
-    // TODO Finish implementing this function
-    // Hint: You will need to call both of your printCharacter functions
-    // (Okay, you don't need to, but the point of this exercise is to call them)
+    printCharacter(BLANK, treeHeight - 1);
+    printCharacter(STAR);
 
     std::cout << std::endl;
 }
@@ -132,9 +149,8 @@ void printStar(int treeHeight)
  */
 void printStem(int treeHeight)
 {
-    // TODO Finish implementing this function
-    // Hint: It will be very similar to printStar(), but the stem is a vertical line
-    // (Thought question) Could we make a new, single function to replace both printStar() and printStem()?
+    printCharacter(BLANK, treeHeight - 1);
+    printCharacter(VERTICAL_LINE);
 
     std::cout << std::endl;
 }
